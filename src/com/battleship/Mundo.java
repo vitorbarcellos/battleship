@@ -56,6 +56,7 @@ public class Mundo {
 	}
 	
 	public void exibe() {
+
 		for (int[] is : mapa) {
 			System.out.print("| ");
 			for (int i : is) {
@@ -63,5 +64,44 @@ public class Mundo {
 			}
 			System.out.println();
 		}
+	}
+
+	public boolean atack(Jogador j, int x, int y) {
+
+		if (this.mapa[x - 1][y - 1] > 0) {
+			j.ganha();
+			this.mapa[x - 1][y - 1] = 9;
+			return true;
+		}
+		return false;
+	}
+
+	public boolean atackRandom(Jogador j) {
+
+		int y = this.random(15);
+		int x = this.random(10);
+
+		if (this.mapa[x][y] > 0) {
+			j.ganha();
+			this.mapa[x][y] = 9;
+			return true;
+		}
+		return false;
+	}
+
+	public void exibeOculto() {
+		
+		for (int i = 0; i < mapa.length; i++) {
+			System.out.print("| . |");
+			for (int j = 0; j < mapa[i].length - 1; j++) {
+				if (this.mapa[i][j] == 9)
+					System.out.print(" x |");
+				else
+					System.out.print(" . |");
+			}
+			System.out.println();
+		}
+		
+		
 	}
 }
